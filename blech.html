@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blech Verwaltung</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">DWE<span>2026</span></a>
+            <button class="nav-toggle" aria-label="Menü öffnen"><span class="hamburger"></span></button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="hypertherm.html" class="nav-link">Hypertherm</a></li>
+                    <li><a href="kennametal.html" class="nav-link">Kennametal</a></li>
+                    <li><a href="sonstige.html" class="nav-link">Sonstige</a></li>
+                    <li><a href="blech.html" class="nav-link">Blech</a></li>
+                    <li><a href="admin.html" class="nav-link">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="blech-page" class="page-content">
+        <div class="table-dashboard">
+            <h2>Blech Verwaltung</h2>
+
+            <!-- Filter-Bereich -->
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="system-select">System</label>
+                    <select id="system-select">
+                        <option value="system_6">Gemini</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="ampere-select">Material filtern:</label>
+                    <select id="ampere-select">
+                        <!-- Wird dynamisch per JS befüllt -->
+                    </select>
+                </div>
+                <!-- In den filter-container der Blech-Seite einfügen -->
+                <div class="filter-group">
+                    <label for="material-select">Material:</label>
+                    <select id="material-select">
+                        <!-- Wird automatisch durch JS befüllt -->
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="oberflaeche-select">Oberfläche:</label>
+                    <select id="oberflaeche-select">
+                        <!-- Wird automatisch durch JS befüllt -->
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Dynamische Tabelle -->
+            <div class="table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Format / Dicke</th>
+                            <th>Bezeichnung</th>
+                            <th class="th-blech-material">Material</th> <!-- KLASSE HINZUGEFÜGT -->
+                            <th class="th-blech-oberflaeche">Oberfläche</th> <!-- KLASSE HINZUGEFÜGT -->
+                            <th>Bestand</th>
+                            <th>Bestellen</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="table-body">
+                        <!-- Zeilen werden per JS generiert -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- NEU: E-Mail Bestell-Button -->
+            <!-- Zwei E-Mail Buttons nebeneinander -->
+            <!-- Drei E-Mail & Reset Buttons nebeneinander -->
+            <div class="action-container"
+                style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end; flex-wrap: wrap;">
+                <button id="send-stock-btn" class="btn" style="background-color: #28a745;">📋 Bestandsliste
+                    senden</button>
+                <button id="send-email-btn" class="btn">🛒 Als E-Mail bestellen</button>
+            </div>
+
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 DWE. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

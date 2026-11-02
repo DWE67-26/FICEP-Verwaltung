@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Bereich</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="admin-page" class="page-content">
+
+    <!-- Haupt-Header & Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">DWE<span>2026</span></a>
+            <button class="nav-toggle" aria-label="Navigation öffnen/schließen">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="hypertherm.html" class="nav-link">Hypertherm</a></li>
+                    <li><a href="kennametal.html" class="nav-link">Kennametal</a></li>
+                    <li><a href="sonstige.html" class="nav-link">Sonstige</a></li>
+                    <li><a href="blech.html" class="nav-link">Blech</a></li>
+                    <li><a href="admin.html" class="nav-link">Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hauptinhalt des Dashboards -->
+    <main class="table-dashboard">
+        <h2>System-Administration</h2>
+        <p style="text-align: center; margin-bottom: 2rem; color: #ccc;">
+            Hier befinden sich die Werkzeuge zur Datensicherung und Systemverwaltung.
+        </p>
+
+        <!-- 🛠 Komponenten-Manager -->
+        <section class="admin-card filter-box" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--primary-color);">🛠 Komponenten-Manager
+            </h3>
+
+            <div class="admin-input-group" style="margin-bottom: 1.2rem;">
+                <label for="admin-system-select">System wählen:</label>
+                <select id="admin-system-select"
+                    style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;">
+                    <option value="system_1">Hypertherm Stahl</option>
+                    <option value="system_2">Hypertherm Edelstahl</option>
+                    <option value="system_3">Kennametal Gemini</option>
+                    <option value="system_4">Kennametal S+B</option>
+                    <option value="system_5">Fräser</option>
+                    <option value="system_6">Blech</option>
+                </select>
+            </div>
+
+            <div class="admin-input-group" style="margin-bottom: 1.2rem;">
+                <label for="admin-ampere-select">Ampere / Größe wählen:</label>
+                <select id="admin-ampere-select"
+                    style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;"></select>
+            </div>
+
+            <div class="admin-input-group" style="margin-bottom: 1.2rem;">
+                <label for="admin-exist-comp-select">Existierende Komponente bearbeiten / löschen:</label>
+                <select id="admin-exist-comp-select"
+                    style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;"></select>
+            </div>
+
+            <!-- CONTAINER 1: Für normale Systeme (System 1-5) -->
+            <div id="admin-standard-spezifikationen-container">
+                <label for="admin-comp-name">Name der Komponente:</label>
+                <input type="text" id="admin-comp-name" placeholder="z.B. Düse">
+
+                <label for="admin-comp-artnr">Artikelnummer / Bezeichnung:</label>
+                <input type="text" id="admin-comp-artnr" placeholder="z.B. 220193">
+            </div>
+
+            <!-- CONTAINER 2: Exklusiv für das Blechsystem (System 6) -->
+            <div id="admin-blech-spezifikationen-container" style="display: none;">
+                <h3>Blech-Spezifikationen</h3>
+
+                <label for="admin-comp-dicke">Dicke (in mm):</label>
+                <input type="number" id="admin-comp-dicke" step="0.5" min="1.0" placeholder="z.B. 1.5">
+
+                <label for="admin-comp-material">Material:</label>
+                <select id="admin-comp-material">
+                    <option value="">-- Material wählen --</option>
+                </select>
+
+                <label for="admin-comp-oberflaeche">Oberfläche:</label>
+                <select id="admin-comp-oberflaeche">
+                    <option value="">-- Oberfläche wählen --</option>
+                </select>
+
+                <label for="admin-blech-artnr">Bezeichnung:</label>
+                <input type="text" id="admin-blech-artnr" placeholder="z.B. 1.4301/DC01/S235JR/S355J0WP/1.3401">
+            </div>
+
+            <div class="admin-actions" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button id="add-component-btn" class="btn">➕ Hinzufügen / Ändern</button>
+                <button id="delete-component-btn" class="btn" style="background-color: #dc3545;">❌ Komponente
+                    löschen</button>
+            </div>
+        </section>
+
+        <!-- ⚙️ System-Manager 
+        <section class="admin-card filter-box" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--primary-color);">⚙️ System-Manager</h3>
+
+            <div class="admin-input-group" style="margin-bottom: 1.2rem;">
+                <label for="admin-sys-action">Aktion wählen:</label>
+                <select id="admin-sys-action"
+                    style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;">
+                    <option value="ADD">Neues System anlegen</option>
+                    <option value="RENAME">System umbenennen</option>
+                    <option value="DELETE">System löschen</option>
+                </select>
+            </div>
+
+            <div class="admin-input-group" id="admin-sys-select-container"
+                style="margin-bottom: 1.2rem; display: none;">
+                <label for="admin-sys-target-select">Betroffenes System:</label>
+                <select id="admin-sys-target-select"
+                    style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;"></select>
+            </div>
+
+            <div class="admin-input-group" id="admin-sys-name-container" style="margin-bottom: 1.2rem;">
+                <label for="admin-sys-name-input">Systemname (Kleinbuchstaben & ohne Sonderzeichen):</label>
+                <input type="text" id="admin-sys-name-input"
+                    style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;">
+            </div>
+
+            <button id="execute-sys-action-btn" class="btn" style="background-color: #fd7e14;">Aktion ausführen</button>
+        </section>-->
+        <!-- NEU: Ampere / Größen Manager -->
+        <div
+            style="background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); margin-top: 1.5rem; margin-bottom: 1.5rem;">
+            <h3 style="margin-bottom: 0.5rem; color: #ffc107; font-size: 1.3rem;">📏 Größen & Ampere verwalten</h3>
+            <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 1rem;">
+                Füge dem oben ausgewählten System eine neue Ampere-Stufe/Größe hinzu, oder lösche die aktuell
+                ausgewählte Stufe (nur möglich, wenn sie leer ist).
+            </p>
+
+            <div
+                style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.4rem; margin-bottom: 1.5rem;">
+                <label for="admin-new-ampere" style="font-weight: 500;">Neue Stufe / Größe eingeben:</label>
+                <input type="text" id="admin-new-ampere" placeholder="z.B. 40A oder 4000x2000"
+                    style="padding: 0.6rem; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.3); color: #fff; border-radius: 6px; width: 100%; font-size: 1rem;">
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button id="add-ampere-btn" class="btn" style="background-color: #ffc107; color: #000; flex: 1;">➕ Größe
+                    hinzufügen</button>
+                <button id="delete-ampere-btn" class="btn" style="background-color: #bd2130; flex: 1;">🗑️ Größe
+                    löschen</button>
+            </div>
+        </div>
+        <!-- ✉️ Anzeige-Filter für E-Mails -->
+        <section class="admin-card filter-box"
+            style="margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem;">Null-Bestände in E-Mails exportieren</h3>
+                <p style="font-size: 0.9rem; color: #aaa;">Bestimme, ob Artikel mit einem Lagerbestand von 0
+                    standardmäßig in der Bestands-E-Mail aufgeführt werden.</p>
+            </div>
+            <div class="toggle-group">
+                <label class="switch">
+                    <input type="checkbox" id="null-bestand-toggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+        </section>
+
+
+        <!-- 💾 Datensicherung & Reset -->
+        <section class="admin-card filter-box"
+            style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Datensicherung (Backup)</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="export-backup-btn" class="btn" style="background-color: #28a745;">💾 Backup
+                        erstellen</button>
+                    <button id="import-backup-btn" class="btn" style="background-color: #17a2b8;">📂 Backup
+                        einspielen</button>
+                </div>
+            </div>
+            <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Daten zurücksetzen</h3>
+                <button id="reset-orders-btn" class="btn" style="background-color: #6c757d;">🗑 Bestellwerte
+                    löschen</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer" style="margin-top: 2rem; width: 100%;">
+        &copy; 2026 DWE. Alle Rechte vorbehalten.
+    </footer>
+
+    <!-- JavaScript-Kopplung -->
+    <script src="script.js"></script>
+</body>
+
+</html>
